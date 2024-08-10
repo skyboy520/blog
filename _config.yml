@@ -4,12 +4,12 @@
 
 # Site
 title: 我的天空
-subtitle: ''
-description: ''
+subtitle: 我心飞翔
+description: 我的博客
 keywords:
 author: Skyboy
 language: zh-CN
-timezone: ''
+timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
