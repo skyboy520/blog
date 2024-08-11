@@ -1,22 +1,30 @@
 ---
+abbrlink: ''
+categories:
+- - 技术
+date: 2024-03-7
+tags:
+- Git
+- 软件
+- 技术
 title: Git - 配置公钥私钥
+updated: 2024-03-7
 ---
--   [before](https://www.cnblogs.com/bubu99/articles/17924054.html#before)
--   [方案一，明文添加用户名和密码(不推荐)](https://www.cnblogs.com/bubu99/articles/17924054.html#%E6%96%B9%E6%A1%88%E4%B8%80%E6%98%8E%E6%96%87%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E5%AF%86%E7%A0%81%E4%B8%8D%E6%8E%A8%E8%8D%90)
--   [方案2：基于凭证助手的方式](https://www.cnblogs.com/bubu99/articles/17924054.html#%E6%96%B9%E6%A1%882%E5%9F%BA%E4%BA%8E%E5%87%AD%E8%AF%81%E5%8A%A9%E6%89%8B%E7%9A%84%E6%96%B9%E5%BC%8F)
--   [方案三，基于公钥私钥的形式](https://www.cnblogs.com/bubu99/articles/17924054.html#%E6%96%B9%E6%A1%88%E4%B8%89%E5%9F%BA%E4%BA%8E%E5%85%AC%E9%92%A5%E7%A7%81%E9%92%A5%E7%9A%84%E5%BD%A2%E5%BC%8F)
-
--   [返回目录](https://www.cnblogs.com/Neeo/p/10864123.html#more)
+- [before](https://www.cnblogs.com/bubu99/articles/17924054.html#before)
+- [方案一，明文添加用户名和密码(不推荐)](https://www.cnblogs.com/bubu99/articles/17924054.html#%E6%96%B9%E6%A1%88%E4%B8%80%E6%98%8E%E6%96%87%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E5%AF%86%E7%A0%81%E4%B8%8D%E6%8E%A8%E8%8D%90)
+- [方案2：基于凭证助手的方式](https://www.cnblogs.com/bubu99/articles/17924054.html#%E6%96%B9%E6%A1%882%E5%9F%BA%E4%BA%8E%E5%87%AD%E8%AF%81%E5%8A%A9%E6%89%8B%E7%9A%84%E6%96%B9%E5%BC%8F)
+- [方案三，基于公钥私钥的形式](https://www.cnblogs.com/bubu99/articles/17924054.html#%E6%96%B9%E6%A1%88%E4%B8%89%E5%9F%BA%E4%BA%8E%E5%85%AC%E9%92%A5%E7%A7%81%E9%92%A5%E7%9A%84%E5%BD%A2%E5%BC%8F)
+- [返回目录](https://www.cnblogs.com/Neeo/p/10864123.html#more)
 
 ## before
 
 默认的，本地每次推送代码到远程仓库，都要输入用户名和密码，想要一劳永逸的解决这个问题，可以有以下几种方式：
 
--   方案1. 在remote add时，在远程仓库的url中手动添加用户名和密码。不推荐这种方式，因为在本地暴露了你的用户名和密码信息。
--   方案2. 基于凭证助手的方式，也就是输入一次用户名密码，就会保存到本地，后续就无需再次输入密码。觉得第三种麻烦，可以用这种。
--   方案3. 以公钥私钥的形式来完成。配置起来相对麻烦一些，但也没那么难。
+- 方案1. 在remote add时，在远程仓库的url中手动添加用户名和密码。不推荐这种方式，因为在本地暴露了你的用户名和密码信息。
+- 方案2. 基于凭证助手的方式，也就是输入一次用户名密码，就会保存到本地，后续就无需再次输入密码。觉得第三种麻烦，可以用这种。
+- 方案3. 以公钥私钥的形式来完成。配置起来相对麻烦一些，但也没那么难。
 
-接下来演示下三种方案。  
+接下来演示下三种方案。
 额外的，我由于在本地反复的演示三种配置，所以，我这里再补充个清除本地认证的命令：
 
 ```bash
@@ -34,7 +42,7 @@ git config --local --unset credential.helper
 
 > windows + 码云
 
-这种方式上面也说了，不推荐因为在本地暴露了你的用户名和密码信息，虽然它暴露在了你自己的本地电脑上了。  
+这种方式上面也说了，不推荐因为在本地暴露了你的用户名和密码信息，虽然它暴露在了你自己的本地电脑上了。
 来看怎么配置：
 
 ```bash
@@ -71,16 +79,15 @@ git config --global credential.helper store
 
 > windows + 码云
 
-我这里还是以本地git结合码云来演示。  
-这种配置方式的原理就是：
+我这里还是以本地git结合码云来演示。这种配置方式的原理就是：
 
--   在你的本地电脑上通过工具和命令来生成公钥和私钥文件。
-    -   Windows下，这个工具由git bash终端内置了，注意是git bash终端，不是Windows系统的cmd终端。
-    -   Mac系统终端中已经内置好了。
--   私钥保存在本地电脑不动它，然后将公钥文件中的公钥拷贝到远程仓库的相关配置中(gitee/github/gitlab，不同的软件配置位置不太一样，但原理是一样的)。然后将公钥拷贝到代码仓库平台。
--   后续push代码都是以ssl进行连接的，所以，配置时，你从代码仓库平台拷贝链接时，注意拷贝SSL类型的，而不是HTTPS类型的，这点尤为重要，别拷贝错了。
+- 在你的本地电脑上通过工具和命令来生成公钥和私钥文件。
+  - Windows下，这个工具由git bash终端内置了，注意是git bash终端，不是Windows系统的cmd终端。
+  - Mac系统终端中已经内置好了。
+- 私钥保存在本地电脑不动它，然后将公钥文件中的公钥拷贝到远程仓库的相关配置中(gitee/github/gitlab，不同的软件配置位置不太一样，但原理是一样的)。然后将公钥拷贝到代码仓库平台。
+- 后续push代码都是以ssl进行连接的，所以，配置时，你从代码仓库平台拷贝链接时，注意拷贝SSL类型的，而不是HTTPS类型的，这点尤为重要，别拷贝错了。
 
-首先，要在本地生成公钥私钥，并且拿到公钥，私钥生成在哪就让它在哪呆着，我们不管。  
+首先，要在本地生成公钥私钥，并且拿到公钥，私钥生成在哪就让它在哪呆着，我们不管。
 **windows**
 
 ```bash
@@ -136,7 +143,7 @@ cat ~/.ssh/id_rsa.pub
 
 ![](https://cdn.jsdelivr.net/gh/skyboy520/picture/picture/1168165-20230604105456666-1547237928.png)
 
-再然后，就是将remote add一个ssh的连接了。  
+再然后，就是将remote add一个ssh的连接了。
 拷贝ssh链接。
 
 ![](https://cdn.jsdelivr.net/gh/skyboy520/picture/picture/1168165-20230604105513054-1151157163.png)
