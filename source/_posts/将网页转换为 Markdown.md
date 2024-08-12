@@ -1,5 +1,12 @@
 ---
+abbrlink: ''
+categories:
+- - 技术
+date: '2024-02-26T08:29:05.089+08:00'
+tags:
+- Markdown
 title: 将网页转换为 Markdown
+updated: '2024-08-12T08:29:05.089+08:00'
 ---
 3 个工具，将网页转换为 Markdown：安卓、Edge、Chrome、Firefox、Obsidian、Safari
 
@@ -41,7 +48,7 @@ https://www.bilibili.com/video/BV1Rw411k7bx/
 
 来自 Steph Ango 的 [Obsidian Web Clipper](https://stephango.com/obsidian-web-clipper)，直接拖动 保存到 Obsidian 到你的书签栏，以后用的时候点一下就可以了
 
-___
+---
 
 原文：https://www.appinn.com/webpage-to-markdown/
 
