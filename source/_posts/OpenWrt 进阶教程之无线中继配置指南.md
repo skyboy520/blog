@@ -1,22 +1,24 @@
 ---
+abbrlink: ''
+categories:
+- - 技术
+date: 2024-3-28
+tags:
+- OpenWrt
 title: OpenWrt 进阶教程之无线中继配置指南
+updated: '2024-08-12T08:40:39.081+08:00'
 ---
 无线网络传输距离是有限的，一个无线信号无法覆盖到较远的地方，或者远处的信号太弱，你希望能把信号增强并延伸过去。添加一台无线路由器，放在信号中间强度位置，通过无线信号连接上一个路由，那么这就称之为无线中继。
 
 ## 无线相关基础概念入门
 
--   **无线路由器/无线网关**: 指的是能发射无线信号的路由器设备，且此设备属于“网关”身份，局域网的所有发往外部网络的数据都要经过此设备处理。
-    
--   **无线 AP**: 指的是能发射无线信号的网络接入点设备，此设备相当于一台能发射无线信号的“交换机”，它只负责将无线数据传输到网关（路由器）。
-    
--   **无线 AC**: 指的是一种专门用于管控无线 AP 的网络设备，常见于各类企业级无线场景，因为企业环境下，往往会部署多个无线 AP，如果一个一个去配置会费时费力，所以各大品牌路由推出了配套的无线 AC 加 AP 产品，只需登录无线AC控制界面，即可管控所有的无线AP，以方便无线部署与管理。
-    
-    注意：AC 加 AP 方案属于配套软件的专有效果，只能使用同品牌指定的 AC 加 AP 产品，不能与其他品牌或产品混用。
-    
--   **接入点**: 通常情况下指的是无线信号的名称（无线 AP），就是你用手机连无线网时看到的名称，专业术语称其为“接入点”。
-    
--   **无线速率**: 指的是无线客户端连接到无线接入点时的最大网络速率，此速率不等于实际最大网速，受无线信号干扰、软件问题、网络限速等多种因素影响，最理想的实际无线网速大约为显示的无线速率的一半。
-    
+- **无线路由器/无线网关**: 指的是能发射无线信号的路由器设备，且此设备属于“网关”身份，局域网的所有发往外部网络的数据都要经过此设备处理。
+- **无线 AP**: 指的是能发射无线信号的网络接入点设备，此设备相当于一台能发射无线信号的“交换机”，它只负责将无线数据传输到网关（路由器）。
+- **无线 AC**: 指的是一种专门用于管控无线 AP 的网络设备，常见于各类企业级无线场景，因为企业环境下，往往会部署多个无线 AP，如果一个一个去配置会费时费力，所以各大品牌路由推出了配套的无线 AC 加 AP 产品，只需登录无线AC控制界面，即可管控所有的无线AP，以方便无线部署与管理。
+
+  注意：AC 加 AP 方案属于配套软件的专有效果，只能使用同品牌指定的 AC 加 AP 产品，不能与其他品牌或产品混用。
+- **接入点**: 通常情况下指的是无线信号的名称（无线 AP），就是你用手机连无线网时看到的名称，专业术语称其为“接入点”。
+- **无线速率**: 指的是无线客户端连接到无线接入点时的最大网络速率，此速率不等于实际最大网速，受无线信号干扰、软件问题、网络限速等多种因素影响，最理想的实际无线网速大约为显示的无线速率的一半。
 
 ## OpenWrt 之万能无线中继
 
@@ -24,29 +26,29 @@ OpenWrt 可以实现一种称之为“万能无线中继”的功能，其实是
 
 打开“网络”-“无线”按需配置即可，示例操作以连接上游 2.4G 无线网络 “WIFI\_2” 为例。
 
-![](https://s.redoc.top/img/article/00999998347795301789244c4393.png "")
+![](https://s.redoc.top/img/article/00999998347795301789244c4393.png )
 
-![](https://s.redoc.top/img/article/00999998347795301442fc25c878.png "")
+![](https://s.redoc.top/img/article/00999998347795301442fc25c878.png )
 
-![](https://s.redoc.top/img/article/00999998347795301123f77c7963.png "")
+![](https://s.redoc.top/img/article/00999998347795301123f77c7963.png )
 
-![](https://s.redoc.top/img/article/009999983477953008143f602ad8.png "")
+![](https://s.redoc.top/img/article/009999983477953008143f602ad8.png )
 
 可选：检查“无线安全”选项卡中的加密方式和密码是否正确。
 
-![](https://s.redoc.top/img/article/009999983477953005134c8bbbd3.png "")
+![](https://s.redoc.top/img/article/009999983477953005134c8bbbd3.png )
 
 这种无线中继方式能非常方便的拓展无线上网覆盖范围，缺点就是无法形成一个统一的局域网。
 
 注意：此模式下，路由器 LAN 口地址不可与上级路由器使用相同的网段，否则将导致无法上网。
 
-![OpenWrt万能无线中继-网络拓扑示意图](https://s.redoc.top/img/article/00999998347795300254399e969b.png "")
+![OpenWrt万能无线中继-网络拓扑示意图](https://s.redoc.top/img/article/00999998347795300254399e969b.png )
 
 ### 单网卡双模式无线中继
 
 上面介绍的方式是一张网卡当作无线客户端，另一张网卡当作无线接入点，此方式的特点是互不干扰，稳定性强。
 
-根据需要也可启用单网卡双模式，即同一张网卡既当客户端又当接入点，此方式下可充分利用无线带宽。  
+根据需要也可启用单网卡双模式，即同一张网卡既当客户端又当接入点，此方式下可充分利用无线带宽。
 注意：单网卡双模式下完全依赖于上游路由器的信号，一旦无法连接上游无线信号，则路由器将不会发射接入点信号。
 
 ### 无线桥接模式
@@ -63,9 +65,9 @@ WDS 中继环境，通过 WAN 口网线上网的路由器我们称其为“主�
 
 首先配置“主路由”，按需修改无线接入点的配置参数。
 
-![](https://s.redoc.top/img/article/0099999834779529995204e158a0.png "")
+![](https://s.redoc.top/img/article/0099999834779529995204e158a0.png )
 
-![](https://s.redoc.top/img/article/00999998347795299728ca4f38fc.png "")
+![](https://s.redoc.top/img/article/00999998347795299728ca4f38fc.png )
 
 主路由配置完毕。
 
@@ -73,47 +75,47 @@ WDS 中继环境，通过 WAN 口网线上网的路由器我们称其为“主�
 
 然后开始配置“从路由”，修改“从路由”的 LAN 口地址，为其固定一个同网段的局域网 IP，不可与局域网内其它设备冲突。
 
-![](https://s.redoc.top/img/article/0099999834779529947290ac16ff.png "")
+![](https://s.redoc.top/img/article/0099999834779529947290ac16ff.png )
 
 ### 第三步
 
 关闭从路由的 DHCP 服务器，以免造成 DHCP 冲突。
 
-![](https://s.redoc.top/img/article/00999998347795299225e750fd6b.png "")
+![](https://s.redoc.top/img/article/00999998347795299225e750fd6b.png )
 
 ### 第四步
 
-禁用 LAN 接口的 IPv6 服务，以避免局域网设备获得多个临时 IPv6 地址，详情参见 [https://iyzm.net/openwrt/478.html](https://iyzm.net/openwrt/478.html "")
+禁用 LAN 接口的 IPv6 服务，以避免局域网设备获得多个临时 IPv6 地址，详情参见 [https://iyzm.net/openwrt/478.html](https://iyzm.net/openwrt/478.html )
 
 ### 第五步
 
 加入上游路由器的 WDS 无线网络。
 
-![](https://s.redoc.top/img/article/00999998347795298954d312654a.png "")
+![](https://s.redoc.top/img/article/00999998347795298954d312654a.png )
 
-![](https://s.redoc.top/img/article/009999983477952986798c88fdbe.png "")
+![](https://s.redoc.top/img/article/009999983477952986798c88fdbe.png )
 
-![](https://s.redoc.top/img/article/0099999834779529841642231d67.png "")
+![](https://s.redoc.top/img/article/0099999834779529841642231d67.png )
 
 可选：检查“无线安全”选项卡中的加密方式和密码是否正确。
 
 至此，从路由的 WDS 相关配置已完毕，只要处于上游无线信号范围内，从路由就能连接到上游路由。
 
-![](https://s.redoc.top/img/article/009999983477952981191958cc53.png "")
+![](https://s.redoc.top/img/article/009999983477952981191958cc53.png )
 
 一点收尾工作，删除界面创建的无效接口。这是因为使用了无线扫描功能来添加WDS客户端参数导致的，直接把无线接入点改为WDS客户端就不会有这个问题了。
 
-![](https://s.redoc.top/img/article/00999998347795297854b85feceb.png "")
+![](https://s.redoc.top/img/article/00999998347795297854b85feceb.png )
 
 OpenWrt 无线中继 WDS-网络拓扑示意图
 
-![](https://s.redoc.top/img/article/0099999834779529756592e269e1.png "")
+![](https://s.redoc.top/img/article/0099999834779529756592e269e1.png )
 
 ### 单网卡双模式无线中继
 
 上面介绍的方式是一张网卡当作无线客户端，另一张网卡当作无线接入点，此方式的特点是互不干扰，稳定性强。
 
-根据需要也可启用单网卡双模式，即同一张网卡既当客户端又当接入点，此方式下可充分利用无线带宽。  
+根据需要也可启用单网卡双模式，即同一张网卡既当客户端又当接入点，此方式下可充分利用无线带宽。
 注意：单网卡双模式下完全依赖于上游路由器的信号，一旦无法连接上游无线信号，则路由器将不会发射接入点信号。
 
 ## OpenWrt 无线中继之 Mesh 网络
@@ -128,20 +130,20 @@ OpenWrt 无线中继 WDS-网络拓扑示意图
 
 注意：Mesh 网络的加密方式只有两个选择，无加密或者 WPA3-SAE
 
-第一步：为路由器 LAN 口配置一个 同网段的 IP 地址，不可与局域网其它设备冲突。  
-第二步：关闭 DHCP 服务器。（局域网内只能保留一个 DHCP 服务器。）  
-第三步：禁用 LAN 接口的 IPv6 服务，以避免局域网设备获得多个临时 IPv6 地址，详情参见 [https://iyzm.net/openwrt/478.html](https://iyzm.net/openwrt/478.html "")  
+第一步：为路由器 LAN 口配置一个 同网段的 IP 地址，不可与局域网其它设备冲突。
+第二步：关闭 DHCP 服务器。（局域网内只能保留一个 DHCP 服务器。）
+第三步：禁用 LAN 接口的 IPv6 服务，以避免局域网设备获得多个临时 IPv6 地址，详情参见 [https://iyzm.net/openwrt/478.html](https://iyzm.net/openwrt/478.html )
 第四步：添加 Mesh 节点无线参数，按需修改无线接入点参数，然后就可以使用了。
 
 把配置完毕的 Mesh 路由器，放置于其它配套的 Mesh 路由器信号范围内即可自动连接上。
 
-![](https://s.redoc.top/img/article/00999998347795297262c67fb28e.png "")
+![](https://s.redoc.top/img/article/00999998347795297262c67fb28e.png )
 
-![](https://s.redoc.top/img/article/00999998347795296981d056349a.png "")
+![](https://s.redoc.top/img/article/00999998347795296981d056349a.png )
 
-![](https://s.redoc.top/img/article/0099999834779529662896092962.png "")
+![](https://s.redoc.top/img/article/0099999834779529662896092962.png )
 
-![](https://s.redoc.top/img/article/00999998347795296338f565d390.png "")
+![](https://s.redoc.top/img/article/00999998347795296338f565d390.png )
 
 有些无线网卡不支持Mesh，和无线网卡的驱动程序有关。
 
@@ -151,7 +153,7 @@ OpenWrt 无线中继 WDS-网络拓扑示意图
 
 无缝漫游需要的是上网客户端支持 802.11r 之类的协议，然后各个 无线AP 也启用 802.11r 之类的协议才能实现无缝漫游。
 
-![OpenWrt 无线中继 Mesh 组网-网络拓扑示意图](https://s.redoc.top/img/article/0099999834779529604196db6cda.png "")
+![OpenWrt 无线中继 Mesh 组网-网络拓扑示意图](https://s.redoc.top/img/article/0099999834779529604196db6cda.png )
 
 ## 总结
 
@@ -169,17 +171,17 @@ OpenWrt 无线中继 WDS-网络拓扑示意图
 
 先为作为 AP 的路由器配置一个同网段局域网 IP ，不可与其它设备冲突。
 
-![](https://s.redoc.top/img/article/0099999834779529947290ac16ff.png "")
+![](https://s.redoc.top/img/article/0099999834779529947290ac16ff.png )
 
 ### 第二步
 
 关闭作为 AP 使用的路由器的 DHCP 服务器。
 
-![](https://s.redoc.top/img/article/00999998347795299225e750fd6b.png "")
+![](https://s.redoc.top/img/article/00999998347795299225e750fd6b.png )
 
 ### 第三步
 
-禁用 LAN 接口的 IPv6 服务，以避免局域网设备获得多个临时 IPv6 地址，详情参见 [https://iyzm.net/openwrt/478.html](https://iyzm.net/openwrt/478.html "")
+禁用 LAN 接口的 IPv6 服务，以避免局域网设备获得多个临时 IPv6 地址，详情参见 [https://iyzm.net/openwrt/478.html](https://iyzm.net/openwrt/478.html )
 
 ### 第四步
 
@@ -187,7 +189,7 @@ OpenWrt 无线中继 WDS-网络拓扑示意图
 
 OpenWrt 有线方式无线拓展-网络拓扑示意图
 
-![](https://s.redoc.top/img/article/0099999834779529495972c7e605.png "")
+![](https://s.redoc.top/img/article/0099999834779529495972c7e605.png )
 
 ## 提高无线漫游效果（无缝漫游）
 
@@ -201,7 +203,7 @@ OpenWrt 有线方式无线拓展-网络拓扑示意图
 
 802.11v 协议允许终端设备交换网络拓扑的信息，包括射频环境，接入点的负载信息，通知客户端切换至更合适的 AP，使得网络负载均衡变得更有效。
 
-![](https://s.redoc.top/img/article/00999998347795294696f88f17e9.png "")
+![](https://s.redoc.top/img/article/00999998347795294696f88f17e9.png )
 
 ### 启用 802.11k
 
@@ -209,7 +211,7 @@ OpenWrt 有线方式无线拓展-网络拓扑示意图
 
 无线设备默认情况下总是倾向于连接信号最好的那个AP，而在实际应用中，这种逻辑可能会造成某个AP被过度使用，而信号稍弱的AP则没有什么设备连接，从而导致网络的整体利用效率下降。启用了 802.11k 协议后，如果信号最好的AP负载过高，则无线设备会连接到信号稍弱的那个AP。
 
-![](https://s.redoc.top/img/article/00999998347795294455587111c6.png "")
+![](https://s.redoc.top/img/article/00999998347795294455587111c6.png )
 
 ### 启用 802.11r
 
@@ -219,11 +221,11 @@ OpenWrt 有线方式无线拓展-网络拓扑示意图
 
 注意：“移动域标识符”用于将多个 AP 进行分组，同一组的 AP 应使用相同的“移动域标识符”。
 
-![](https://s.redoc.top/img/article/0099999834779529416138378fb4.png "")
+![](https://s.redoc.top/img/article/0099999834779529416138378fb4.png )
 
-获取 4 位数的十六进制数值可使用 Hex(16进制)随机生成计算器：[https://www.jisuan.mobi/p1H31N31z611NyWX.html](https://www.jisuan.mobi/p1H31N31z611NyWX.html "")
+获取 4 位数的十六进制数值可使用 Hex(16进制)随机生成计算器：[https://www.jisuan.mobi/p1H31N31z611NyWX.html](https://www.jisuan.mobi/p1H31N31z611NyWX.html )
 
-![](https://s.redoc.top/img/article/00999998347795293880bdeee926.png "")
+![](https://s.redoc.top/img/article/00999998347795293880bdeee926.png )
 
 注意：为确保良好的无线漫游效果，还应当使用相同型号的无线路由器作为 AP 。
 
@@ -233,9 +235,9 @@ OpenWrt 有线方式无线拓展-网络拓扑示意图
 
 只需修改 LAN 口参数，补齐网关地址和 DNS 地址即可，有时可能需要重启一次系统，然后这个 AP 就可以正常上网了。
 
-![](https://s.redoc.top/img/article/00999998347795293608a6de46bf.png "")
+![](https://s.redoc.top/img/article/00999998347795293608a6de46bf.png )
 
-![](https://s.redoc.top/img/article/0099999834779529334195a24e05.png "")
+![](https://s.redoc.top/img/article/0099999834779529334195a24e05.png )
 
 [
 
